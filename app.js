@@ -101,7 +101,7 @@ const app = {
             "
           ></div>
           <div class="body">
-            <h3 class="title">${song.name}</h3>
+            <h3 class="title">${song.name.toUpperCase()}</h3>
             <p class="author">${song.composer}</p>
           </div>
           <div class="option">
