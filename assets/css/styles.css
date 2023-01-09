@@ -83,7 +83,7 @@ header h2 {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 18px 10px 8px;
+  padding: 18px 0px 8px;
 }
 
 .control .btn {
@@ -135,30 +135,31 @@ header h2 {
 
 .volume-control {
   display: flex;
-  position: relative;
-  flex-direction: column;
   align-items: center;
-  padding: 10px 10px 8px 10px;
+  justify-content: center;
   cursor: pointer;
 }
-.volume-control:hover .progress-vertical {
+.volume-control:hover .progress-vertical,
+.volume-control:focus .progress-vertical,
+.volume-control:target .progress-vertical,
+.volume-control:active .progress-vertical {
   opacity: 1;
   visibility: visible;
-  bottom: 100%;
+  /* bottom: 100%; */
 }
 .btn-volume {
   width: 20px;
+  padding-right: 20px;
 }
 .progress-vertical {
-  position: absolute;
-  width: 3px;
-  -webkit-appearance: slider-vertical;
-  height: 100px;
+  /* position: absolute;
+  bottom: 100%; */
+  width: 200px;
+  /* -webkit-appearance: slider-vertical; */
   background: #d3d3d3;
   outline: none;
-  opacity: 0;
-  visibility: hidden;
-  position: absolute;
+  /* opacity: 0;
+  visibility: hidden; */
   transition: all 0.3s ease;
   transition-delay: 1s;
   -webkit-transition: 1s;
@@ -167,7 +168,7 @@ header h2 {
 .progress-vertical::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 6px;
+  width: 10px;
   height: 3px;
   background-color: var(--primary-color);
   cursor: pointer;
