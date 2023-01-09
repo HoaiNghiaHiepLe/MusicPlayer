@@ -171,7 +171,6 @@ const app = {
           `${progressPercent}%`
         );
       }
-      console.log("🚀 ~ file: app.js:174 ~ handleEvent ~ progress", progress);
       app.setConfig("currentIndex", app.currentIndex);
       app.setConfig("seekTime", audio.currentTime);
     };
@@ -268,6 +267,10 @@ const app = {
         app.setConfig("currentVolume", audio.volume); // Save the current volume
         volumeRange.value = 0;
         volumeBtn.innerHTML = '<i class="fas fa-volume-off"></i>';
+        volumeRange.style.setProperty(
+          "--current-percentage",
+          `${Math.floor(0)}%`
+        );
       } else {
         // Unmute the audio and set the volume back to the last value
         audio.volume = app.config.lastModifierVolume || 1;
@@ -275,6 +278,10 @@ const app = {
         // Set the volume back to the last value or to 100% if no value is saved
         volumeRange.value = audio.volume * 100;
         volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+        volumeRange.style.setProperty(
+          "--current-percentage",
+          `${Math.floor(audio.volume * 100)}%`
+        );
       }
     };
   },
