@@ -299,12 +299,13 @@ const app = {
   loadStoredSong() {
     this.currentIndex = this.config.currentIndex || 0;
     audio.currentTime = this.config.seekTime || 0;
-    audio.volume = this.config.currentVolume;
     volumeRange.value = this.config.currentVolume * 100;
-    if (audio.volume === 0) {
+    if (this.config.currentVolume === 0) {
       volumeBtn.innerHTML = '<i class="fas fa-volume-off"></i>';
+      audio.volume = 0;
     } else {
       volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+      audio.volume = app.config.currentVolume || 1;
     }
   },
   nextSong() {
