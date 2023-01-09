@@ -295,7 +295,7 @@ const app = {
     }, 300);
   },
   loadCurrentSong() {
-    heading.textContent = this.currentSong.name;
+    heading.textContent = this.currentSong.name.toLowerCase();
     cdThumb.style.backgroundImage = `url("${this.currentSong.image}")`;
     audio.src = this.currentSong.path;
   },
