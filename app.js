@@ -166,7 +166,12 @@ const app = {
           (audio.currentTime / audio.duration) * 100
         );
         progress.value = progressPercent;
+        progress.style.setProperty(
+          "--current-percentage",
+          `${progressPercent}%`
+        );
       }
+      console.log("🚀 ~ file: app.js:174 ~ handleEvent ~ progress", progress);
       app.setConfig("currentIndex", app.currentIndex);
       app.setConfig("seekTime", audio.currentTime);
     };
@@ -242,6 +247,10 @@ const app = {
     volumeRange.oninput = (e) => {
       const currentVolume = e.target.value / 100;
       audio.volume = currentVolume;
+      volumeRange.style.setProperty(
+        "--current-percentage",
+        `${Math.floor(currentVolume * 100)}%`
+      );
       if (currentVolume === 0) {
         volumeBtn.innerHTML = '<i class="fas fa-volume-off"></i>';
         app.setConfig("currentVolume", 0);
@@ -300,6 +309,10 @@ const app = {
     this.currentIndex = this.config.currentIndex || 0;
     audio.currentTime = this.config.seekTime || 0;
     volumeRange.value = this.config.currentVolume * 100;
+    volumeRange.style.setProperty(
+      "--current-percentage",
+      `${Math.floor(this.config.currentVolume * 100)}%`
+    );
     if (this.config.currentVolume === 0) {
       volumeBtn.innerHTML = '<i class="fas fa-volume-off"></i>';
       audio.volume = 0;
