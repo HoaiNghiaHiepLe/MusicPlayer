@@ -182,7 +182,6 @@ header h2 {
 }
 .progress::-webkit-slider-runnable-track,
 .progress-volume::-webkit-slider-runnable-track {
-  /* Other styles */
   height: 6px;
   background: linear-gradient(to right, #293043, #293043), #d7d7d7;
   background-size: var(--current-percentage, 0%) 100%;

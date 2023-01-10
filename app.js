@@ -14,10 +14,15 @@ const prevBtn = $(".btn-prev");
 const randomBtn = $(".btn-random");
 const repeatBtn = $(".btn-repeat");
 const playList = $(".playlist");
-const volumeRange = $("#volumeRange");
-const volumeBtn = $(".btn-volume");
 const displayCurrentTime = $(".current-time");
 const displayDurationTime = $(".duration-time");
+const volumeControl = $(".volume-control");
+const volumeRange = $("#volumeRange");
+const volumeBtn = $(".btn-volume");
+const volumeIndicator = document.createElement("div");
+volumeIndicator.classList.add("volume-indicator");
+volumeControl.appendChild(volumeIndicator);
+
 const app = {
   currentIndex: 0,
   isPlaying: false,
@@ -254,7 +259,7 @@ const app = {
         }
       }
     };
-    // handle volume range
+    // handle volume control
     volumeRange.oninput = (e) => {
       const currentVolume = e.target.value / 100;
       audio.volume = currentVolume;
@@ -270,6 +275,28 @@ const app = {
         app.setConfig("currentVolume", currentVolume);
       }
     };
+    // handle show volume value
+    volumeRange.addEventListener("input", (e) => {
+      volumeControl.style.position = "relative";
+      volumeControl.style.marginBottom = "16px";
+      volumeIndicator.style.position = "absolute";
+      volumeIndicator.style.color = "#666666";
+      volumeIndicator.style.fontSize = "14px";
+      volumeIndicator.innerHTML = `${e.target.value}%`;
+      const rangeWidth = volumeRange.offsetWidth;
+      const thumbHeight = volumeRange.offsetHeight;
+      const offset =
+        (e.target.value / 100) * (rangeWidth - thumbHeight / 2) + 130;
+      volumeIndicator.style.left = `${offset}px`;
+      volumeIndicator.style.top = `${
+        e.target.offsetTop - volumeIndicator.offsetHeight / 2 + 20
+      }px`;
+      volumeIndicator.style.opacity = 1;
+    });
+    volumeRange.addEventListener("mouseout", () => {
+      volumeControl.style.marginBottom = "0px";
+      volumeIndicator.style.opacity = 0;
+    });
     // handle mute
     volumeBtn.onclick = () => {
       if (audio.volume > 0) {
