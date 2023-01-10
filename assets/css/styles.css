@@ -118,11 +118,11 @@ header h2 {
 }
 .progress-control span:first-child {
   margin-right: 10px;
-  width: 30px;
+  width: 40px;
 }
 .progress-control span:last-child {
   margin-left: 10px;
-  width: 30px;
+  width: 40px;
 }
 
 .progress {

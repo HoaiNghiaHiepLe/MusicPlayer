@@ -185,8 +185,8 @@ const app = {
           "--current-percentage",
           `${progressPercent}%`
         );
-        displayCurrentTime.innerHTML = app.formatTime(audio.currentTime);
-        displayDurationTime.innerHTML = app.formatTime(audio.duration);
+        displayCurrentTime.innerHTML = app?.formatTime(audio?.currentTime);
+        displayDurationTime.innerHTML = app?.formatTime(audio?.duration);
       }
       app.setConfig("currentIndex", app.currentIndex);
       app.setConfig("seekTime", audio.currentTime);
