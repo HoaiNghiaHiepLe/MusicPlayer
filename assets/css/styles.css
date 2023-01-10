@@ -134,7 +134,11 @@ header h2 {
   border-radius: 50%;
   margin-top: calc((6px - 20px) / 2);
 }
-
+/* @media only screen and (max-width: 480px) {
+  .volume-control {
+    display: none !important;
+  }
+} */
 .volume-control {
   display: flex;
   align-items: center;

@@ -16,12 +16,15 @@ const repeatBtn = $(".btn-repeat");
 const playList = $(".playlist");
 const volumeRange = $("#volumeRange");
 const volumeBtn = $(".btn-volume");
+// Create a new AudioContext
 const audioContext = new AudioContext();
 
 // Connect the audio element to the AudioContext
 const source = audioContext.createMediaElementSource(audio);
+
 // Create a gain node to control the volume
 const gainNode = audioContext.createGain();
+
 // Connect the gain node to the audio context destination
 source.connect(gainNode).connect(audioContext.destination);
 const app = {
@@ -255,7 +258,6 @@ const app = {
       const currentVolume = e.target.value / 100;
       audio.volume = currentVolume;
       gainNode.gain.value = currentVolume;
-
       volumeRange.style.setProperty(
         "--current-percentage",
         `${Math.floor(currentVolume * 100)}%`
@@ -270,12 +272,12 @@ const app = {
     };
     // handle mute
     volumeBtn.onclick = () => {
-      if (audio.volume > 0) {
+      if (audio.volume > 0 || gainNode.gain.value > 0) {
         // Mute the audio
         app.setConfig("lastModifierVolume", audio.volume); // Save the current volume
         audio.volume = 0;
-        gainNode.gain.value = 0;
-        app.setConfig("currentVolume", audio.volume); // Save the current volume
+        gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+        app.setConfig("currentVolume", gainNode.gain.value); // Save the current volume
         volumeRange.value = 0;
         volumeBtn.innerHTML = '<i class="fas fa-volume-off"></i>';
         volumeRange.style.setProperty(
@@ -286,9 +288,9 @@ const app = {
         // Unmute the audio and set the volume back to the last value
         audio.volume = app.config.lastModifierVolume || 1;
         gainNode.gain.value = app.config.lastModifierVolume || 1;
-        app.setConfig("currentVolume", audio.volume); // Save the current volume
+        app.setConfig("currentVolume", gainNode.gain.value); // Save the current volume
         // Set the volume back to the last value or to 100% if no value is saved
-        volumeRange.value = audio.volume * 100;
+        volumeRange.value = gainNode.gain.value * 100;
         volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
         volumeRange.style.setProperty(
           "--current-percentage",
