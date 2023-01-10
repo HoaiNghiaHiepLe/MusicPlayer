@@ -112,20 +112,22 @@ header h2 {
   align-items: center;
   justify-content: space-between;
 }
-.progress-control span {
+
+.progress-control .current-time {
   color: var(--primary-color);
   font-size: 15px;
-}
-.progress-control span:first-child {
   margin-right: 10px;
-  width: 40px;
+  width: 30px;
 }
-.progress-control span:last-child {
+.progress-control .duration-time {
+  color: var(--primary-color);
+  font-size: 15px;
   margin-left: 10px;
-  width: 40px;
+  width: 30px;
 }
 
 .progress {
+  flex: 1;
   width: 100%;
   -webkit-appearance: none;
   height: 6px;
