@@ -16,6 +16,8 @@ const repeatBtn = $(".btn-repeat");
 const playList = $(".playlist");
 const volumeRange = $("#volumeRange");
 const volumeBtn = $(".btn-volume");
+const displayCurrentTime = $(".current-time");
+const displayDurationTime = $(".duration-time");
 const app = {
   currentIndex: 0,
   isPlaying: false,
@@ -84,6 +86,14 @@ const app = {
       image: "./assets/img/Thuyền Quyên (AM Remix) - Diệu Kiên.jpg",
     },
   ],
+  formatTime(time) {
+    const minutes = Math.floor(time / 60);
+    let seconds = Math.floor(time % 60);
+    if (seconds < 10) {
+      seconds = `0${seconds}`;
+    }
+    return `${minutes}:${seconds}`;
+  },
   setConfig(key, value) {
     this.config[key] = value;
     localStorage.setItem(PLAYER_STORAGE_KEY, JSON.stringify(this.config));
@@ -170,6 +180,8 @@ const app = {
           "--current-percentage",
           `${progressPercent}%`
         );
+        displayCurrentTime.innerHTML = app.formatTime(audio.currentTime);
+        displayDurationTime.innerHTML = app.formatTime(audio.duration);
       }
       app.setConfig("currentIndex", app.currentIndex);
       app.setConfig("seekTime", audio.currentTime);

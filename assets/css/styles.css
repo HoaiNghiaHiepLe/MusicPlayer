@@ -112,6 +112,16 @@ header h2 {
   align-items: center;
   justify-content: space-between;
 }
+.progress-control span {
+  color: var(--primary-color);
+  font-size: 15px;
+}
+.progress-control span:first-child {
+  margin-right: 10px;
+}
+.progress-control span:last-child {
+  margin-left: 10px;
+}
 
 .progress {
   width: 100%;
@@ -179,9 +189,16 @@ header h2 {
   background-repeat: no-repeat;
 }
 /* PLAYLIST */
+@media only screen and (min-width: 480px) {
+  .playlist {
+    margin-top: 426px !important;
+  }
+}
+
 .playlist {
-  margin-top: 408px;
+  margin-top: 400px;
   padding: 12px;
+  background-color: #d7d7d7;
 }
 
 .song {
