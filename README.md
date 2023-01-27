@@ -1,4 +1,4 @@
-A simple music player loading and playing songs from assets folder
+The music player has many functions that can load playlists, seeking songs, playback songs, play random songs in the list. All user settings will be saved in local storage and will be loaded the next time you open the app
 
 # Technologies in use
 
